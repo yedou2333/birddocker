@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="./index.css">
+    <script src="./vue.js"></script>
+    <script src="./vue-router.js"></script>
+</head>
+
+<body>
+    <div id="app" class="container">
+        <router-view></router-view>
+    </div>
+
+    <template id="goodsList">
+        <div>
+            <ul>
+                <li v-for="(item) in dataList" class="goodsItem" :key="item.id" @click="goodsClick(item.id)">
+                    <img class="goodsImg" />
+                    <div class="goodsInfo">
+                        <p class="title">{{ item.name }}</p>
+                        <p class="content">{{ item.content }}</p>
+                        <p class="goodsPrice">￥{{ item.price }}</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </template>
+
+    <template id="goodsDetails">
+        <div>
+            <div class="goodsDetail-hd">
+                <span class="goodsDetail-backIcon" @click="goBack">
+                    <img src="./imgs//back.png" />
+                </span>
+                <span class="goodsDetail-hdTitle">
+                    商品详情
+                </span>
+            </div>
+            <img src="./imgs/bg.jpg" class="goodsDetail-img" />
+            <p class="goodsDetail-name">{{ goodsDetails.name }}</p>
+            <p class="goodsDetail-content">{{ goodsDetails.content }}</p>
+        </div>
+    </template>
+
+    <script>
+        const goodsList = [
+            { id: 0, name: '电水壶', price: 99.9, content: '米家小米电水壶热水壶电热水壶304不锈钢1800W暖水壶烧水壶开水壶智能断电' },
+            { id: 1, name: '电压力锅', price: 199.9, content: '美的（Midea）提鲜系列 智能电压力锅6L家用多功能不粘双胆上蒸下煮开盖收汁' },
+            { id: 2, name: '电饭锅', price: 299.9, content: '小熊（Bear）电饭煲 电饭锅迷你家用小容量一键快煮饭多功能预约定时配蒸笼1.6L蒸饭器小型小2人 DFB-C16K1' },
+            { id: 3, name: '洗发水', price: 46, content: '海飞丝洗发水清爽去油洗发水控油1KG(持久去屑清爽柔润) 柠檬香' },
+            { id: 6, name: '护发素', price: 56, content: '潘婷护发素 氨基酸3分钟奇迹护发素多效损伤修护180ml发膜级护发素' },
+            { id: 7, name: '扫地机器人', price: 1999.9, content: '米家小米扫地机器人扫拖一体 扫洗拖一体机擦地机拖地机器人 智能自动扫地拖地 拖布自清洗' },
+            { id: 8, name: '空气净化器', price: 3999.9, content: '米家小米全效空气净化器 分解式除醛除菌雾霾异味家用净化机智能数显' },
+        ];
+
+        // 1. 创建组件
+        const goodsListComp = {
+            template: '#goodsList',
+            data() {
+                return {
+                    dataList: goodsList
+                }
+            },
+            methods: {
+                goodsClick(id) {
+                    this.$router.push('/goodsDetails?gId=' + id);
+                }
+            }
+        };
+        const goodsDetailsComp = {
+            template: '#goodsDetails',
+            data() {
+                return {
+                    goodsDetails: {}
+                }
+            },
+            methods: {
+                goBack() {
+                    this.$router.go(-1);
+                }
+            },
+            // 页面挂载成功后执行
+            mounted() {
+                // 获取商品id
+                const gId = this.$route.query.gId;
+
+                const goods = goodsList.find(function (item) {
+                    return item.id === +gId;
+                });
+
+                this.goodsDetails = goods;
+            }
+        };
+
+        // 2. 创建路由对象
+        const routerObj = new VueRouter({
+            routes: [
+                // 首页的路由匹配规则
+                { path: '/', component: goodsListComp },
+                // 详情页的路由匹配规则
+                { path: '/goodsDetails', component: goodsDetailsComp }
+            ]
+        });
+
+        // 3. 注册路由对象
+        var vm = new Vue({
+            el: '#app',
+            router: routerObj
+        });
+    </script>
+</body>
+
+</html>

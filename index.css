@@ -1,0 +1,104 @@
+html, body {
+    height: 100%;
+    padding: 0;
+    margin: 0;
+}
+
+ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+p {
+    margin: 0;
+    padding: 0;
+}
+
+.container {
+    height: 100%;
+}
+
+.main {
+    padding-bottom: 50px;
+}
+
+.footer {
+    position: fixed;
+    bottom: 0;
+    width: 100%;
+}
+
+
+.goodsImg {
+    width: 60px;
+    height: 80px;
+}
+
+.goodsItem {
+    padding: 10px 20px;
+    display: flex;
+}
+
+.goodsInfo {
+    flex: 1;
+    padding-left: 10px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.goodsInfo .title {
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.goodsInfo .content {
+    font-size: 14px;
+}
+
+.goodsPrice {
+    padding: 4px 0;
+    color: #ff5d23;
+}
+
+.addBtn {
+    font-size: 12px;
+    outline: none;
+    border: none;
+    padding: 4px 10px;
+    background-color: #ff5d23;
+    color: #fff;
+}
+ 
+.goodsDetail-img {
+    width: 100%;
+}
+
+.goodsDetail-name {
+    padding: 0 20px;
+    font-size: 16px;
+    font-weight: bold;
+}
+
+.goodsDetail-content {
+    padding: 20px;
+    
+}
+
+.goodsDetail-hd {
+    position: relative;
+
+    text-align: center;
+}
+
+.goodsDetail-backIcon {
+    position: absolute;
+    left: 20px;
+    top: 50%;
+    transform: translateY(-50%);
+}
+
+.goodsDetail-hdTitle {
+    line-height: 50px;
+    font-size: 20px;
+}
